@@ -1,0 +1,2 @@
+CREATE SCHEMA IF NOT EXISTS myschema;
+GRANT USAGE ON SCHEMA myschema TO docker;

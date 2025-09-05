@@ -1,0 +1,3 @@
+db:
+  POSTGRES_HOST: db
+  POSTGRES_DB: docker
