@@ -5,6 +5,7 @@ import (
 	_ "embed"
 	"fmt"
 	"log"
+	"regexp"
 
 	"gopkg.in/yaml.v3"
 
@@ -23,6 +24,10 @@ type Config struct {
 	} `yaml:"db"`
 }
 
+func sanitizeInput(s string) string {
+	re := regexp.MustCompile(`[^a-zA-Z0-9_-]`)
+	return re.ReplaceAllString(s, "")
+}
 func main() {
 	var username string
 	var password string
@@ -30,7 +35,8 @@ func main() {
 	fmt.Scanln(&username)
 	fmt.Println("Enter pq password for user", username, ":")
 	fmt.Scanln(&password)
-
+	username = sanitizeInput(username)
+	password = sanitizeInput(password)
 	c := Config{}
 	if err := yaml.Unmarshal(config_file, &c); err != nil {
 		log.Fatalf("error: %v", err)
