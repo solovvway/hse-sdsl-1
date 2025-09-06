@@ -25,7 +25,7 @@ type Config struct {
 }
 
 func sanitizeInput(s string) string {
-	re := regexp.MustCompile(`[^a-zA-Z0-9_-]`)
+	re := regexp.MustCompile(`[=\s]`)
 	return re.ReplaceAllString(s, "")
 }
 func main() {
